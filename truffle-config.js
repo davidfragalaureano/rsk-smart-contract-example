@@ -43,16 +43,16 @@ module.exports = {
     regtest: {
       // Use default provider, Regtest starts with unlocked accounts
       host: '127.0.0.1',
-      port: 4444,
-      network_id: 33,
-      networkCheckTimeout: 1e3,
+      port: 9545,
+      network_id: 5777,
+      networkCheckTimeout: 10000,
     },
     testnet: {
       provider: () => new HDWalletProvider({
         mnemonic: {
           phrase: testnetSeedPhrase,
         },
-        providerOrUrl: 'https://public-node.testnet.rsk.co/2.0.1/',
+        providerOrUrl: 'https://public-node.testnet.rsk.co/',
         // Higher polling interval to check for blocks less frequently
         pollingInterval: 15e3,
       }),
@@ -60,7 +60,7 @@ module.exports = {
       network_id: 31,
       gasPrice: Math.floor(gasPriceTestnet * TESTNET_GAS_MULT),
       networkCheckTimeout: 1e6,
-      timeoutBlocks: 100,
+      timeoutBlocks: 100000,
       // Higher polling interval to check for blocks less frequently
       // during deployment
       deploymentPollingInterval: 15e3,
@@ -111,7 +111,7 @@ module.exports = {
       // Ref: http://developers.rsk.co/rsk/architecture/account-based/#chainid
       network_id: 30,
       gasPrice: Math.floor(gasPriceMainnet * MAINNET_GAS_MULT),
-      networkCheckTimeout: 10e3,
+      networkCheckTimeout: 10000,
       timeoutBlocks: 100,
     },
   },

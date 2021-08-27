@@ -16,24 +16,36 @@ contract Election {
     uint public candidatesCount;
 
     constructor () public {
-        // TODO set default candidates
+        // set default candidates
+        addCandidate("Carrot");
+        addCandidate("Potato");
     }
 
     function addCandidate (
         string memory _name
     ) private {
-        // TODO store new candidate in state variables
+        candidatesCount++;
+        candidates[candidatesCount] =
+            Candidate(candidatesCount, _name, 0);
     }
 
     function vote (
         uint _candidateId
     ) public {
-        // TODO check that account hasn't voted before
+        // check that account hasn't voted before
         // and that candidate is valid
+        require(
+            !voters[msg.sender]);
+
         require(
             _candidateId > 0 &&
             _candidateId <= candidatesCount);
 
-        // TODO record that voter has voted
+        // record that voter has voted
+        voters[msg.sender] = true;
+        
+        // update candidate vote Count
+        candidates[_candidateId].voteCount++;
+
     }
 }
